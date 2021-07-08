@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/cameraAcquisitionFragment">
+
+    <fragment
+        android:id="@+id/cameraAcquisitionFragment"
+        android:name="it.github.samuele794.sushisigner.view.camera.fragment.CameraAcquisitionFragment"
+        android:label="CameraAcquisitionFragment"
+        tools:layout="@layout/fragment_camera_acquisition">
+        <action
+            android:id="@+id/action_cameraAcquisitionFragment_to_cameraDrawFragment"
+            app:destination="@id/cameraDrawFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/cameraDrawFragment"
+        android:name="it.github.samuele794.sushisigner.view.camera.fragment.CameraDrawFragment"
+        android:label="CameraDrawFragment"
+        tools:layout="@layout/fragment_camera_draw">
+        <argument
+            android:name="imageUri"
+            app:argType="android.net.Uri" />
+    </fragment>
+</navigation>
