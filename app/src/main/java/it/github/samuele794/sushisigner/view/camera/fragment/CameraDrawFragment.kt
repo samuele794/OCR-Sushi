@@ -4,12 +4,12 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import it.github.samuele794.sushisigner.R
 import it.github.samuele794.sushisigner.databinding.FragmentCameraDrawBinding
 import it.github.samuele794.sushisigner.utils.viewBinding
 import it.github.samuele794.sushisigner.viewmodel.camera.CameraDrawViewModel
@@ -43,7 +43,7 @@ class CameraDrawFragment : Fragment() {
     private fun renderViewState(state: CameraDrawViewModel.AcquisitionState) {
         when (state) {
             is CameraDrawViewModel.AcquisitionState.StartAcquisitionState -> {
-                viewBinding.cardTextAcquired.visibility = GONE
+                viewBinding.root.transitionToState(R.id.cardTransitionShowStart)
                 viewBinding.drawView.clearDraw()
                 viewBinding.drawView.enableDraw()
                 renderViewState(state.nextState)
@@ -72,6 +72,7 @@ class CameraDrawFragment : Fragment() {
             }
 
             is CameraDrawViewModel.AcquisitionState.CardDataEditState -> {
+                viewBinding.root.transitionToState(R.id.cardTransitionShowEnd)
                 viewBinding.cardTextAcquired.visibility = VISIBLE
                 viewBinding.headerIL.editText?.setText(state.textHeader)
                 viewBinding.bodyIL.editText?.setText(state.textBody)
