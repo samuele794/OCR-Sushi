@@ -13,13 +13,15 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizerOptions
+import it.github.samuele794.sushisigner.data.model.Signer
+import it.github.samuele794.sushisigner.data.repository.SignerRepository
 import it.github.samuele794.sushisigner.utils.onFailure
 import it.github.samuele794.sushisigner.utils.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class CameraDrawViewModel : ViewModel() {
+class CameraDrawViewModel(private val signerRepository: SignerRepository) : ViewModel() {
     //https://thoughtbot.com/blog/finite-state-machines-android-kotlin-good-times
 
     private val mDrawStateData: MutableLiveData<AcquisitionState> by lazy {
@@ -114,6 +116,14 @@ class CameraDrawViewModel : ViewModel() {
         val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
         recognizer.process(image).await()
+    }
+
+    fun saveSigner(headerText: String, bodyText: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            signerRepository.saveSigner(
+                Signer(title = headerText, body = bodyText)
+            )
+        }
     }
 
     sealed class AcquisitionState {

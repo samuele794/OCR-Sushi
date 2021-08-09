@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
@@ -36,6 +37,37 @@ class CameraDrawFragment : Fragment() {
 
         viewModel.getDrawDataState().observe(viewLifecycleOwner) { state ->
             renderViewState(state)
+        }
+
+        viewBinding.saveButton.setOnClickListener {
+            viewModel.saveSigner(
+                viewBinding.headerIL.editText?.text.toString(),
+                viewBinding.bodyIL.editText?.text.toString()
+            )
+            viewBinding.root.transitionToState(R.id.cardDismissEnd)
+            viewBinding.root.addTransitionListener(object : MotionLayout.TransitionListener {
+                override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) = Unit
+
+                override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) =
+                    Unit
+
+                override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                    viewBinding.root.removeTransitionListener(this)
+                    renderViewState(
+                        CameraDrawViewModel.AcquisitionState.StartAcquisitionState(
+                            CameraDrawViewModel.AcquisitionState.TextStateHeader()
+                        )
+                    )
+                }
+
+                override fun onTransitionTrigger(
+                    p0: MotionLayout?,
+                    p1: Int,
+                    p2: Boolean,
+                    p3: Float
+                ) = Unit
+
+            })
         }
 
     }
