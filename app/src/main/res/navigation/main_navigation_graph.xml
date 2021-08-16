@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/cameraAcquisitionFragment">
+    app:startDestination="@id/signerListFragment">
 
     <fragment
         android:id="@+id/cameraAcquisitionFragment"
@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_camera_acquisition">
         <action
             android:id="@+id/action_cameraAcquisitionFragment_to_cameraDrawFragment"
-            app:destination="@id/cameraDrawFragment"/>
+            app:destination="@id/cameraDrawFragment" />
     </fragment>
     <fragment
         android:id="@+id/cameraDrawFragment"
@@ -22,5 +22,14 @@
         <argument
             android:name="imageUri"
             app:argType="android.net.Uri" />
+    </fragment>
+    <fragment
+        android:id="@+id/signerListFragment"
+        android:name="it.github.samuele794.sushisigner.view.list.SignerListFragment"
+        android:label="SignerListFragment"
+        tools:layout="@layout/fragment_signer_list">
+        <action
+            android:id="@+id/action_signerListFragment_to_cameraAcquisitionFragment"
+            app:destination="@id/cameraAcquisitionFragment" />
     </fragment>
 </navigation>

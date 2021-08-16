@@ -6,12 +6,14 @@ import it.github.samuele794.sushisigner.data.repository.AppDatabase
 import it.github.samuele794.sushisigner.data.repository.SignerRepository
 import it.github.samuele794.sushisigner.data.repository.SignerRepositoryImpl
 import it.github.samuele794.sushisigner.viewmodel.camera.CameraDrawViewModel
+import it.github.samuele794.sushisigner.viewmodel.view.list.SignerListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
     viewModel { CameraDrawViewModel(get()) }
+    viewModel { SignerListViewModel(get()) }
 }
 
 val dataModule = module {
