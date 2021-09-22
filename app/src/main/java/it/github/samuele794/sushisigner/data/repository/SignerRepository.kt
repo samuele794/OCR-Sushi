@@ -6,6 +6,7 @@ interface SignerRepository {
     suspend fun saveSigner(signer: Signer)
 
     suspend fun getAllSigner(): List<Signer>
+    fun deleteSigner(item: Signer)
 }
 
 class SignerRepositoryImpl(appDB: AppDatabase) : SignerRepository {
@@ -16,4 +17,8 @@ class SignerRepositoryImpl(appDB: AppDatabase) : SignerRepository {
     }
 
     override suspend fun getAllSigner() = signerDao.getAll()
+
+    override fun deleteSigner(item: Signer) {
+        signerDao.deleteSigner(item)
+    }
 }

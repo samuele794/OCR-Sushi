@@ -11,17 +11,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import it.github.samuele794.sushisigner.databinding.FragmentCameraAcquisitionBinding
+import it.github.samuele794.sushisigner.utils.viewBinding
+import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import it.github.samuele794.sushisigner.utils.viewBinding
-import kotlinx.coroutines.runBlocking
-import java.io.File
 
 class CameraAcquisitionFragment : Fragment() {
 

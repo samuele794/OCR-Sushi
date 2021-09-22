@@ -9,7 +9,7 @@ import it.github.samuele794.sushisigner.databinding.ItemSignerBinding
 class SignerListAdapter :
     RecyclerView.Adapter<SignerListAdapter.SignerViewHolder>() {
 
-    private val dataSet = mutableListOf<Signer>()
+    val dataSet = mutableListOf<Signer>()
 
     class SignerViewHolder(val binding: ItemSignerBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -31,9 +31,22 @@ class SignerListAdapter :
 
     override fun getItemCount(): Int = dataSet.size
 
+    fun removeItem(item: Signer) {
+        val position = dataSet.indexOf(item)
+        dataSet.remove(item)
+        notifyItemChanged(position)
+    }
+
+    fun removeFromIndex(index: Int) {
+        dataSet.removeAt(index)
+        notifyItemChanged(index)
+    }
+
     fun setData(list: List<Signer>) {
         dataSet.clear()
         dataSet.addAll(list)
         notifyDataSetChanged()
     }
+
+
 }

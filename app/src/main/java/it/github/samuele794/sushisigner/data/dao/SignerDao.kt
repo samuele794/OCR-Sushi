@@ -1,6 +1,7 @@
 package it.github.samuele794.sushisigner.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
@@ -14,5 +15,8 @@ interface SignerDao {
 
     @Query("SELECT * from Signer")
     suspend fun getAll(): List<Signer>
+
+    @Delete
+    fun deleteSigner(item: Signer)
 
 }

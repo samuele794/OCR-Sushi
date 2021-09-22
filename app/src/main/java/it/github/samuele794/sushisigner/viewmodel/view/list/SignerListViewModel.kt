@@ -23,4 +23,10 @@ class SignerListViewModel(private val signerRepository: SignerRepository) : View
             mSignerFlow.value = signerRepository.getAllSigner()
         }
     }
+
+    fun removeSigner(item: Signer) {
+        viewModelScope.launch(Dispatchers.IO) {
+            signerRepository.deleteSigner(item)
+        }
+    }
 }
